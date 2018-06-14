@@ -2,6 +2,7 @@ package com.springboot.jpa.springbootjpacart.service;
 
 import com.springboot.jpa.springbootjpacart.entity.Product;
 import com.springboot.jpa.springbootjpacart.entity.Status;
+import com.springboot.jpa.springbootjpacart.exception.ProductNotFoundException;
 import com.springboot.jpa.springbootjpacart.repository.ProductRepository;
 import com.springboot.jpa.springbootjpacart.repository.StatusRepository;
 import com.springboot.jpa.springbootjpacart.request.CreateProductRequest;
@@ -34,6 +35,15 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> listProductByActive() {
         List<Product> list = new ArrayList<>();
         for (Product product : productRepository.findByStatus()){
+            list.add(product);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Product> listProductByDeactive() {
+        List<Product> list = new ArrayList<>();
+        for (Product product : productRepository.findByStatusDeactive()){
             list.add(product);
         }
         return list;

@@ -10,5 +10,6 @@ public interface ProductService {
 
     List<Product> listProduct();
     List<Product> listProductByActive();
+    List<Product> listProductByDeactive();
     Product createProduct(CreateProductRequest requestProduct);
 }

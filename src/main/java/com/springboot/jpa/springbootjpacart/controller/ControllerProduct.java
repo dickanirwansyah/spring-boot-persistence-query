@@ -1,6 +1,7 @@
 package com.springboot.jpa.springbootjpacart.controller;
 
 import com.springboot.jpa.springbootjpacart.entity.Product;
+import com.springboot.jpa.springbootjpacart.exception.ProductNotFoundException;
 import com.springboot.jpa.springbootjpacart.request.CreateProductRequest;
 import com.springboot.jpa.springbootjpacart.response.ErrorResponse;
 import com.springboot.jpa.springbootjpacart.service.ProductService;
@@ -28,6 +29,15 @@ public class ControllerProduct {
         return Optional.ofNullable(productService.listProductByActive())
                 .map(callbackJSON -> new ResponseEntity<>(callbackJSON, HttpStatus.OK))
                 .orElse(new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping(value = "/deactive")
+    public ResponseEntity<List<Product>> deactive(){
+        List<Product> deactives = productService.listProductByDeactive();
+        if (deactives.isEmpty()){
+            return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Product>>(deactives, HttpStatus.OK);
     }
 
     @GetMapping

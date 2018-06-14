@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, String>{
 
     @Query("FROM Product AS p WHERE p.status.idstatus=1")
     List<Product> findByStatus();
+
+    @Query("FROM Product AS p WHERE p.status.idstatus=2")
+    List<Product> findByStatusDeactive();
 }
