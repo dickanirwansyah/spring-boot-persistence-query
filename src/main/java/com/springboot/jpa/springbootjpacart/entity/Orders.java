@@ -8,6 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,4 +36,7 @@ public class Orders {
 
     @Column(name = "phone", nullable = false)
     private String phone;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrdersItem> ordersItems = new ArrayList<>();
 }
